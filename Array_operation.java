@@ -9,8 +9,11 @@ public class Array_operation {
 		array[2] = 5;
 		array[3] = 2;
 		array[4] = 4;
-		array[5] = 7;
+		array[5] = 4;
 		array[6] = 8;
+		array[7] = 5;
+		array[8] = 9;
+		array[9] = 4;
 
 		String[] str_arry = new String[10];
 		str_arry[0] = "aa";
@@ -20,7 +23,7 @@ public class Array_operation {
 		str_arry[4] = "ee";
 		str_arry[5] = "ff";
 		str_arry[6] = "gg";
-		str_arry[7] = "hh";
+		str_arry[7] = "gg";
 		str_arry[8] = "ii";
 		str_arry[9] = "jj";
 
@@ -92,56 +95,58 @@ public class Array_operation {
 			System.out.println("\nChoose and enter which element to delete");
 			Scanner read2 = new Scanner(System.in);
 			int element_del = read2.nextInt();
-			int pos = Integer.MAX_VALUE;
+			int count = 0;
 			for (int i = 0; i < array.length; i++) {
 				if (array[i] == element_del) {
-					pos = i + 1;
+					count++;
+					for (int j = i; j < array.length; j++) {
+						if (j < array.length - 1)
+							array[j] = array[j + 1];
+					}
+					array[array.length - count] = 0;
+					i--;
 				}
-			}
-			if (pos == Integer.MAX_VALUE) {
-				System.out.println("Sorry entered element not in array");
-			} else {
-				for (int i = pos - 1; i < array.length - 1; i++) {
-					array[i] = array[i + 1];
-				}
-				array[array.length - 1] = 0;
-			}
-			System.out.println("\nArray after deleting element");
-			for (int i = 0; i < array.length; i++) {
-				System.out.print(array[i] + " ");
 			}
 
+			if (count == 0) {
+				System.out.println("Sorry entered element not in array");
+			} else {
+				System.out.println("\nArray after deleting element");
+				for (int i = 0; i < array.length - count; i++) {
+					System.out.print(array[i] + " ");
+				}
+			}
 			break;
 		case 4:
 			System.out.println("String array elements");
 			for (int i = 0; i < str_arry.length; i++) {
 				System.out.print(str_arry[i] + " ");
 			}
-			System.out.println("\nChoose and enter which string to delete");
+			System.out.println("\n\nChoose and enter which string to delete");
 			Scanner read3 = new Scanner(System.in);
-			String string_del = "";
-			string_del = read3.next();
-			int pos1 = Integer.MAX_VALUE;
+			String string_del = read3.next();
+			count = 0;
+			
 			for (int i = 0; i < str_arry.length; i++) {
 				if (str_arry[i].equals(string_del)) {
-					pos1 = i + 1;
-					break;
+					count++;					
+					for (int j = i; j < str_arry.length; j++) {
+						if (j< str_arry.length - 1)
+							str_arry[j] = str_arry[j + 1];
+					}
+					str_arry[str_arry.length - count] = "";
+					i--;
 				}
 			}
-			if (pos1 == Integer.MAX_VALUE) {
+
+			if (count == 0) {
 				System.out.println("Sorry entered string not in array");
 			} else {
-				for (int i = pos1 - 1; i < str_arry.length - 1; i++) {
-					str_arry[i] = str_arry[i + 1];
-				}
-				str_arry[array.length - 1] = "";
-
-				System.out.println("\nArray after deleting string");
-				for (int i = 0; i < str_arry.length; i++) {
+				System.out.println("Array after deleting element");
+				for (int i = 0; i < str_arry.length - count; i++) {
 					System.out.print(str_arry[i] + " ");
 				}
-			}
-
+			}			
 			break;
 		default:
 			System.out.println("Please enter valid input(1-4");
